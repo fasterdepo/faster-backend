@@ -1,0 +1,13 @@
+{
+  "name": "fasterdepo-backend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "test:e2e": "npm --prefix app run test:e2e",
+    "test:integration": "npm --prefix app run test:integration",
+    "dev": "npm --prefix app run dev",
+    "build": "npm --prefix app run build:prod",
+    "lint": "npm --prefix app run lint",
+    "format": "npm --prefix app run format"
+  }
+}

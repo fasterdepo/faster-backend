@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://backend:3001}
+      NEXT_PUBLIC_STELLAR_NETWORK: ${NEXT_PUBLIC_STELLAR_NETWORK:-testnet}
+      NEXT_PUBLIC_HORIZON_URL: ${NEXT_PUBLIC_HORIZON_URL:-https://horizon-testnet.stellar.org}
+      NEXT_PUBLIC_SOROBAN_RPC_URL: ${NEXT_PUBLIC_SOROBAN_RPC_URL:-https://soroban-testnet.stellar.org}
+      NEXT_PUBLIC_MARKET_FACTORY_ADDRESS: ${NEXT_PUBLIC_MARKET_FACTORY_ADDRESS}
+      NEXT_PUBLIC_XLM_TOKEN_ADDRESS: ${NEXT_PUBLIC_XLM_TOKEN_ADDRESS}
+      NODE_ENV: ${NODE_ENV:-production}
+    depends_on:
+      - backend
+    networks:
+      - fasterdepo
+
+  # Reference to backend (you'd typically run this from the backend repo)
+  backend:
+    external: true
+    # Or if running locally, uncomment and configure:
+    # image: fasterdepo-backend:latest
+    # ports:
+    #   - "3001:3001"
+    # environment:
+    #   DATABASE_URL: postgresql://...
+    #   REDIS_URL: redis://redis:6379
+
+networks:
+  fasterdepo:
+    driver: bridge
+

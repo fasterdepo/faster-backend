@@ -1,0 +1,111 @@
+version: 2
+
+updates:
+  # Backend npm dependencies
+  - package-ecosystem: "npm"
+    directory: "/backend"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    labels:
+      - "dependencies"
+      - "security"
+    reviewers:
+      - "doradenise-jpg"
+    open-pull-requests-limit: 10
+    groups:
+      minor-patch:
+        update-types:
+          - "minor"
+          - "patch"
+      security:
+        patterns:
+          - "*security*"
+        update-types:
+          - "patch"
+    auto-merge: true
+    auto-merge-limit: 5
+
+  # Frontend npm dependencies
+  - package-ecosystem: "npm"
+    directory: "/frontend"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    labels:
+      - "dependencies"
+      - "security"
+    reviewers:
+      - "doradenise-jpg"
+    open-pull-requests-limit: 10
+    groups:
+      minor-patch:
+        update-types:
+          - "minor"
+          - "patch"
+      security:
+        patterns:
+          - "*security*"
+        update-types:
+          - "patch"
+    auto-merge: true
+    auto-merge-limit: 5
+
+  # Indexer npm dependencies
+  - package-ecosystem: "npm"
+    directory: "/indexer"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    labels:
+      - "dependencies"
+      - "security"
+    reviewers:
+      - "doradenise-jpg"
+    open-pull-requests-limit: 5
+    groups:
+      minor-patch:
+        update-types:
+          - "minor"
+          - "patch"
+      security:
+        patterns:
+          - "*security*"
+        update-types:
+          - "patch"
+    auto-merge: true
+    auto-merge-limit: 3
+
+  # Rust / Cargo dependencies (Soroban contracts)
+  - package-ecosystem: "cargo"
+    directory: "/contracts"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    labels:
+      - "dependencies"
+      - "security"
+    reviewers:
+      - "doradenise-jpg"
+    open-pull-requests-limit: 5
+    auto-merge:
+      enabled: true
+      update-types:
+        - "minor"
+        - "patch"
+    groups:
+      patch-updates:
+        update-types:
+          - "patch"
+
+  # GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    labels:
+      - "dependencies"
+      - "ci-cd"
+      - "security"
+    reviewers:
+      - "doradenise-jpg"

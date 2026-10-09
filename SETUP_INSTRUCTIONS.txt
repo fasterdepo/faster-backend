@@ -1,0 +1,198 @@
+================================================================================
+  fasterdepo - SPLIT REPOSITORY SETUP INSTRUCTIONS
+================================================================================
+
+Your fasterdepo project has been split into TWO INDEPENDENT REPOSITORIES:
+
+  1. fasterdepo-frontend/   (Next.js 14 on port 3000)
+  2. fasterdepo-backend/    (Express API on port 3001)
+
+================================================================================
+  QUICK START (5 minutes)
+================================================================================
+
+STEP 1: Start Backend
+  $ cd fasterdepo-backend
+  $ npm install && npm --prefix app install
+  $ npm --prefix app run migrate
+  $ npm run dev
+  
+  → Backend will run on http://localhost:3001
+  → Keep this terminal open
+
+STEP 2: Start Frontend (NEW TERMINAL)
+  $ cd fasterdepo-frontend
+  $ npm install
+  $ npm run dev
+  
+  → Frontend will run on http://localhost:3000
+  → Keep this terminal open
+
+STEP 3: Open Browser
+  → http://localhost:3000 (Frontend)
+  → http://localhost:3001 (Backend API)
+  → http://localhost:3001/api/docs (Swagger Documentation)
+
+================================================================================
+  KEY REPOSITORIES
+================================================================================
+
+Frontend:  fasterdepo-frontend/
+  - Next.js 14 application
+  - React 18 with Tailwind CSS
+  - E2E tests with Playwright
+  - Environment: NEXT_PUBLIC_API_URL (e.g., http://localhost:3001)
+
+Backend:   fasterdepo-backend/
+  - Express.js API server
+  - PostgreSQL database
+  - Redis cache
+  - Stellar blockchain integration
+  - Environment: All in app/.env
+
+================================================================================
+  ENVIRONMENT FILES
+================================================================================
+
+Frontend Configuration: fasterdepo-frontend/.env.local
+  Copy from: fasterdepo-frontend/.env.example
+  Required: NEXT_PUBLIC_API_URL=http://localhost:3001
+
+Backend Configuration: fasterdepo-backend/app/.env
+  Copy from: fasterdepo-backend/app/.env.example
+  Required: DATABASE_URL, REDIS_URL, JWT_SECRET, etc.
+
+================================================================================
+  DOCKER (Alternative)
+================================================================================
+
+Full Stack with Docker:
+  $ cd fasterdepo-backend
+  $ docker-compose up -d
+  
+  Then in another terminal:
+  $ cd fasterdepo-frontend
+  $ docker-compose up -d
+
+Check Services:
+  - Frontend:  http://localhost:3000
+  - Backend:   http://localhost:3001
+  - Postgres:  localhost:5432
+  - Redis:     localhost:6379
+
+================================================================================
+  DOCUMENTATION
+================================================================================
+
+Quick Start:        SPLIT_REPOS_QUICK_START.md
+Comprehensive:     MONOREPO_SPLIT_GUIDE.md
+Summary:           SPLIT_COMPLETE_SUMMARY.md
+
+Frontend Details:  fasterdepo-frontend/README.md
+Backend Details:   fasterdepo-backend/README.md
+
+Frontend Guide:    fasterdepo-frontend/CONTRIBUTING.md
+Backend Guide:     fasterdepo-backend/CONTRIBUTING.md
+
+================================================================================
+  COMMON COMMANDS
+================================================================================
+
+Frontend:
+  npm run dev           # Start development
+  npm run build         # Build for production
+  npm test              # Run tests
+  npm run test:e2e      # E2E tests
+  npm run lint          # Lint code
+  npm run format        # Format code
+
+Backend:
+  npm run dev                    # Start development
+  npm run build                  # Build for production
+  npm --prefix app run test      # Tests
+  npm run test:e2e              # E2E tests
+  npm --prefix app run migrate  # Database migrations
+  npm run lint                   # Lint code
+  npm run format                 # Format code
+
+Database:
+  npm --prefix app run migrate            # Apply migrations
+  npm --prefix app run migrate:generate   # Create new migration
+  npm --prefix app run drizzle:studio     # GUI for database
+
+================================================================================
+  TROUBLESHOOTING
+================================================================================
+
+Frontend can't connect to backend?
+  ✓ Check NEXT_PUBLIC_API_URL in frontend/.env.local
+  ✓ Verify backend is running on http://localhost:3001
+  ✓ Check browser console for errors
+
+Backend won't start?
+  ✓ Check PostgreSQL is running
+  ✓ Verify DATABASE_URL in app/.env is correct
+  ✓ Run migrations: npm --prefix app run migrate
+
+Database errors?
+  ✓ Ensure PostgreSQL is accessible
+  ✓ Check connection string
+  ✓ Check migration status: npm --prefix app run migrate:check
+
+Port conflicts?
+  Frontend: Edit next.config.js or use --port flag
+  Backend:  Change PORT in app/.env
+
+================================================================================
+  ARCHITECTURE
+================================================================================
+
+  ┌─────────────────────────────┐
+  │   Frontend (port 3000)      │
+  │   - Next.js 14              │
+  │   - React 18                │
+  │   - Tailwind CSS            │
+  │   - User Interface          │
+  └──────────────┬──────────────┘
+                 │ HTTP REST API
+                 │ (NEXT_PUBLIC_API_URL)
+                 ↓
+  ┌─────────────────────────────┐
+  │   Backend (port 3001)       │
+  │   - Express.js              │
+  │   - PostgreSQL              │
+  │   - Redis                   │
+  │   - Stellar Integration     │
+  └─────────────────────────────┘
+
+  Benefits:
+  ✓ Independent deployment
+  ✓ Separate scaling
+  ✓ Clear separation of concerns
+  ✓ Faster development
+  ✓ Better testing
+
+================================================================================
+  NEXT STEPS
+================================================================================
+
+  1. Run STEP 1: Start Backend (npm run dev)
+  2. Run STEP 2: Start Frontend (npm run dev)
+  3. Open http://localhost:3000 in browser
+  4. Start developing!
+
+================================================================================
+  NEED MORE HELP?
+================================================================================
+
+  1. Read SPLIT_REPOS_QUICK_START.md for quick reference
+  2. Read MONOREPO_SPLIT_GUIDE.md for comprehensive guide
+  3. Check frontend/README.md or backend/README.md for specifics
+  4. See CONTRIBUTING.md in each repo for development guidelines
+
+================================================================================
+
+Happy coding! 🚀
+
+
+
